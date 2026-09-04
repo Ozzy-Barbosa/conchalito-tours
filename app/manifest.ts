@@ -12,8 +12,8 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: 'es-MX',
     icons: [
       {
-        src: '/images/baja-spirit-logo.png',
-        sizes: '2048x2048',
+        src: '/images/baja-spirit-symbol-transparent.png',
+        sizes: 'any',
         type: 'image/png',
         purpose: 'any',
       },

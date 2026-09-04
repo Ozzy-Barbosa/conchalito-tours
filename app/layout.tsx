@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Baja Spirit Adventures' }],
   creator: 'Baja Spirit Adventures',
   icons: {
-    icon: '/images/baja-spirit-logo.png',
-    apple: '/images/baja-spirit-logo.png',
+    icon: '/images/baja-spirit-symbol-transparent.png',
+    apple: '/images/baja-spirit-symbol-transparent.png',
   },
   alternates: { canonical: '/' },
   openGraph: {

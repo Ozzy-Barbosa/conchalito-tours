@@ -1,6 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import {
   Anchor,
   ArrowDownRight,
@@ -35,6 +43,30 @@ const content = {
     topline: 'Exploramos el Mar de Cortés contigo',
     nav: ['Experiencias', 'Rutas y precios', 'Nosotros', 'Galería', 'Preguntas'],
     reserve: 'Reservar',
+    lead: {
+      trigger: 'Planear mi tour',
+      eyebrow: 'Cotización guiada',
+      title: 'Cuéntanos tu plan',
+      description: 'Déjanos los datos esenciales y Héctor podrá orientarte con una ruta, fecha y salida adecuada para tu grupo.',
+      benefits: ['Revisión de disponibilidad', 'Recomendación de ruta', 'Seguimiento directo por WhatsApp'],
+      name: 'Nombre completo',
+      namePlaceholder: '¿Cómo te llamas?',
+      phone: 'Tu WhatsApp',
+      phonePlaceholder: 'Incluye lada',
+      date: 'Fecha aproximada',
+      travelers: 'Número de viajeros',
+      route: 'Ruta de interés',
+      routePlaceholder: 'Selecciona una ruta',
+      tripType: 'Tipo de salida',
+      shared: 'Compartida',
+      private: 'Privada / grupo completo',
+      notes: '¿Qué te gustaría vivir?',
+      notesPlaceholder: 'Cuéntanos si viajan niños, si desean snorkel o si tienen alguna necesidad especial.',
+      submit: 'Enviar solicitud a Héctor',
+      privacy: 'Al continuar se abrirá WhatsApp con tus datos organizados. El sitio no almacena esta información.',
+      close: 'Cerrar formulario',
+      noDate: 'Por definir',
+    },
     eyebrow: 'Isla Espíritu Santo · Mar de Cortés',
     heroLine1: 'El mar se vive',
     heroLine2: 'desde dentro.',
@@ -187,6 +219,30 @@ const content = {
     topline: 'Explore the Sea of Cortez with us',
     nav: ['Experiences', 'Routes & prices', 'About us', 'Gallery', 'Questions'],
     reserve: 'Book now',
+    lead: {
+      trigger: 'Plan my tour',
+      eyebrow: 'Guided quote',
+      title: 'Tell us about your trip',
+      description: 'Share the essentials so Héctor can recommend the right route, date and departure for your group.',
+      benefits: ['Availability review', 'Route recommendation', 'Direct WhatsApp follow-up'],
+      name: 'Full name',
+      namePlaceholder: 'What is your name?',
+      phone: 'Your WhatsApp',
+      phonePlaceholder: 'Include country code',
+      date: 'Approximate date',
+      travelers: 'Number of travelers',
+      route: 'Route of interest',
+      routePlaceholder: 'Select a route',
+      tripType: 'Departure type',
+      shared: 'Shared',
+      private: 'Private / full group',
+      notes: 'What would you like to experience?',
+      notesPlaceholder: 'Tell us if children are traveling, if you want to snorkel, or if your group has any special needs.',
+      submit: 'Send request to Héctor',
+      privacy: 'WhatsApp will open with your details organized. This website does not store your information.',
+      close: 'Close form',
+      noDate: 'To be decided',
+    },
     eyebrow: 'Espíritu Santo Island · Sea of Cortez',
     heroLine1: 'Experience the sea',
     heroLine2: 'from within.',
@@ -350,6 +406,7 @@ function whatsappLink(message: string) {
 export default function SiteClient() {
   const [language, setLanguage] = useState<Language>('es');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [leadOpen, setLeadOpen] = useState(false);
   const t = content[language];
   const genericWhatsApp = whatsappLink(
     language === 'es'
@@ -369,6 +426,46 @@ export default function SiteClient() {
 
   const toggleLanguage = () => setLanguage((current) => (current === 'es' ? 'en' : 'es'));
 
+  const handleLeadSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get('name') || '');
+    const phone = String(data.get('phone') || '');
+    const date = String(data.get('date') || '') || t.lead.noDate;
+    const travelers = String(data.get('travelers') || '');
+    const route = String(data.get('route') || '');
+    const tripType = String(data.get('tripType') || '');
+    const notes = String(data.get('notes') || '').trim();
+    const message = language === 'es'
+      ? [
+          'Hola Héctor, quiero recibir información para organizar un tour con Baja Spirit Adventures.',
+          '',
+          `Nombre: ${name}`,
+          `WhatsApp: ${phone}`,
+          `Fecha aproximada: ${date}`,
+          `Viajeros: ${travelers}`,
+          `Ruta de interés: ${route}`,
+          `Tipo de salida: ${tripType}`,
+          notes ? `Comentarios: ${notes}` : '',
+        ].filter(Boolean).join('\n')
+      : [
+          'Hello Héctor, I would like information to plan a tour with Baja Spirit Adventures.',
+          '',
+          `Name: ${name}`,
+          `WhatsApp: ${phone}`,
+          `Approximate date: ${date}`,
+          `Travelers: ${travelers}`,
+          `Route of interest: ${route}`,
+          `Departure type: ${tripType}`,
+          notes ? `Comments: ${notes}` : '',
+        ].filter(Boolean).join('\n');
+
+    window.open(whatsappLink(message), '_blank', 'noopener,noreferrer');
+    form.reset();
+    setLeadOpen(false);
+  };
+
   return (
     <main>
       <script
@@ -384,7 +481,7 @@ export default function SiteClient() {
               'Tours en lancha a Isla Espíritu Santo desde La Paz, Baja California Sur, para familias y grupos.',
             priceRange: '$990–$1,500 MXN',
             image: 'https://bajaspiritadventures.com/images/hero.webp',
-            logo: 'https://bajaspiritadventures.com/images/baja-spirit-logo.png',
+            logo: 'https://bajaspiritadventures.com/images/baja-spirit-symbol-transparent.png',
             areaServed: { '@type': 'Place', name: 'La Paz, Baja California Sur' },
             address: {
               '@type': 'PostalAddress',
@@ -418,7 +515,7 @@ export default function SiteClient() {
         <nav className="nav-shell" aria-label={t.navAria}>
           <a className="brand" href="#inicio" aria-label="Baja Spirit Adventures">
             <span className="brand-symbol" aria-hidden="true">
-              <img src="/images/baja-spirit-logo.png" alt="" width="2048" height="2048" />
+              <img src="/images/baja-spirit-symbol-transparent.png" alt="" width="1535" height="1025" />
             </span>
             <span className="brand-name"><strong>BAJA SPIRIT</strong><small>ADVENTURES</small></span>
           </a>
@@ -427,9 +524,9 @@ export default function SiteClient() {
           </div>
           <div className="nav-actions">
             <button className="lang-button" type="button" onClick={toggleLanguage} aria-label={t.langAria}>{t.langLabel}</button>
-            <a className="nav-cta" href={genericWhatsApp} target="_blank" rel="noreferrer">
+            <button className="nav-cta" type="button" onClick={() => setLeadOpen(true)}>
               <MessageCircle size={17} /> {t.reserve}
-            </a>
+            </button>
             <button
               className="menu-button"
               type="button"
@@ -456,9 +553,9 @@ export default function SiteClient() {
           <h1>{t.heroLine1}<br /><em>{t.heroLine2}</em></h1>
           <p className="hero-copy">{t.heroCopy}</p>
           <div className="hero-actions">
-            <a className="button-primary" href={genericWhatsApp} target="_blank" rel="noreferrer">
-              {t.quote} <ArrowDownRight size={19} />
-            </a>
+            <button className="button-primary" type="button" onClick={() => setLeadOpen(true)}>
+              <CalendarDays size={19} /> {t.lead.trigger}
+            </button>
             <a className="button-ghost" href="#tours">{t.explore}</a>
           </div>
         </div>
@@ -601,7 +698,7 @@ export default function SiteClient() {
         <div className="page-width final-content">
           <p className="kicker">{t.finalKicker}</p>
           <h2>{t.finalTitle}</h2><p>{t.finalText}</p>
-          <div><a className="button-primary" href={genericWhatsApp} target="_blank" rel="noreferrer"><MessageCircle size={19} />{t.finalButton}</a><a href="tel:+526121178086">{t.call}</a></div>
+          <div><button className="button-primary" type="button" onClick={() => setLeadOpen(true)}><CalendarDays size={19} />{t.lead.trigger}</button><a href="tel:+526121178086">{t.call}</a></div>
         </div>
       </section>
 
@@ -610,10 +707,10 @@ export default function SiteClient() {
           <div className="footer-brand">
             <a className="footer-logo-card" href="#inicio" aria-label="Baja Spirit Adventures">
               <img
-                src="/images/baja-spirit-logo.png"
-                alt="Baja Spirit Adventures — Sea Tours, Fishing y Hiking en La Paz"
-                width="2048"
-                height="2048"
+                src="/images/baja-spirit-symbol-transparent.png"
+                alt="Baja Spirit Adventures"
+                width="1535"
+                height="1025"
                 loading="lazy"
               />
             </a>
@@ -629,6 +726,70 @@ export default function SiteClient() {
         </div>
         <div className="page-width footer-legal"><span>© {new Date().getFullYear()} {t.rights}</span><span>{t.legal}</span></div>
       </footer>
+
+      <Dialog open={leadOpen} onOpenChange={setLeadOpen}>
+        <DialogContent className="lead-dialog" showCloseButton={false}>
+          <DialogClose className="lead-dialog-close" aria-label={t.lead.close}>
+            <X size={20} />
+          </DialogClose>
+          <div className="lead-dialog-shell">
+            <aside className="lead-dialog-brand">
+              <img src="/images/baja-spirit-symbol-transparent.png" alt="" width="1535" height="1025" aria-hidden="true" />
+              <div>
+                <p>{t.lead.eyebrow}</p>
+                <h3>Baja Spirit<br />Adventures</h3>
+                <ul>
+                  {t.lead.benefits.map((benefit) => <li key={benefit}><Check size={16} />{benefit}</li>)}
+                </ul>
+              </div>
+            </aside>
+            <div className="lead-dialog-form-panel">
+              <DialogHeader className="lead-dialog-header">
+                <DialogTitle>{t.lead.title}</DialogTitle>
+                <DialogDescription>{t.lead.description}</DialogDescription>
+              </DialogHeader>
+              <form className="lead-form" onSubmit={handleLeadSubmit}>
+                <label className="lead-field">
+                  <span>{t.lead.name}</span>
+                  <input name="name" type="text" autoComplete="name" placeholder={t.lead.namePlaceholder} required />
+                </label>
+                <label className="lead-field">
+                  <span>{t.lead.phone}</span>
+                  <input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder={t.lead.phonePlaceholder} required />
+                </label>
+                <label className="lead-field">
+                  <span>{t.lead.date}</span>
+                  <input name="date" type="date" />
+                </label>
+                <label className="lead-field">
+                  <span>{t.lead.travelers}</span>
+                  <input name="travelers" type="number" inputMode="numeric" min="1" max="17" placeholder="2" required />
+                </label>
+                <label className="lead-field">
+                  <span>{t.lead.route}</span>
+                  <select name="route" defaultValue="" required>
+                    <option value="" disabled>{t.lead.routePlaceholder}</option>
+                    {t.routes.map((route) => <option key={route.name} value={route.name}>{route.name} · {route.price} MXN</option>)}
+                  </select>
+                </label>
+                <label className="lead-field">
+                  <span>{t.lead.tripType}</span>
+                  <select name="tripType" defaultValue={t.lead.shared} required>
+                    <option value={t.lead.shared}>{t.lead.shared}</option>
+                    <option value={t.lead.private}>{t.lead.private}</option>
+                  </select>
+                </label>
+                <label className="lead-field lead-field-full">
+                  <span>{t.lead.notes}</span>
+                  <textarea name="notes" rows={3} placeholder={t.lead.notesPlaceholder} />
+                </label>
+                <button className="lead-submit" type="submit"><MessageCircle size={19} />{t.lead.submit}</button>
+                <p className="lead-privacy"><ShieldCheck size={15} />{t.lead.privacy}</p>
+              </form>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <a className="floating-whatsapp" href={genericWhatsApp} target="_blank" rel="noreferrer" aria-label={t.float}><MessageCircle size={22} /><span>{t.float}</span></a>
     </main>
