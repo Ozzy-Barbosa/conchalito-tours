@@ -19,7 +19,6 @@ import {
   Sun,
   Users,
   UtensilsCrossed,
-  Waves,
   X,
 } from 'lucide-react';
 
@@ -385,6 +384,7 @@ export default function SiteClient() {
               'Tours en lancha a Isla Espíritu Santo desde La Paz, Baja California Sur, para familias y grupos.',
             priceRange: '$990–$1,500 MXN',
             image: 'https://bajaspiritadventures.com/images/hero.webp',
+            logo: 'https://bajaspiritadventures.com/images/baja-spirit-logo.png',
             areaServed: { '@type': 'Place', name: 'La Paz, Baja California Sur' },
             address: {
               '@type': 'PostalAddress',
@@ -417,8 +417,10 @@ export default function SiteClient() {
 
         <nav className="nav-shell" aria-label={t.navAria}>
           <a className="brand" href="#inicio" aria-label="Baja Spirit Adventures">
-            <span className="brand-mark"><Waves size={24} strokeWidth={2.2} /></span>
-            <span><strong>BAJA SPIRIT</strong><small>ADVENTURES</small></span>
+            <span className="brand-symbol" aria-hidden="true">
+              <img src="/images/baja-spirit-logo.png" alt="" width="2048" height="2048" />
+            </span>
+            <span className="brand-name"><strong>BAJA SPIRIT</strong><small>ADVENTURES</small></span>
           </a>
           <div className="nav-links">
             {t.nav.map((item, index) => <a key={item} href={sectionHrefs[index]}>{item}</a>)}
@@ -606,7 +608,15 @@ export default function SiteClient() {
       <footer>
         <div className="page-width footer-main">
           <div className="footer-brand">
-            <a className="brand" href="#inicio"><span className="brand-mark"><Waves size={24} /></span><span><strong>BAJA SPIRIT</strong><small>ADVENTURES</small></span></a>
+            <a className="footer-logo-card" href="#inicio" aria-label="Baja Spirit Adventures">
+              <img
+                src="/images/baja-spirit-logo.png"
+                alt="Baja Spirit Adventures — Sea Tours, Fishing y Hiking en La Paz"
+                width="2048"
+                height="2048"
+                loading="lazy"
+              />
+            </a>
             <p>{t.social}</p>
             <div className="social-links">
               <a href="https://www.facebook.com/tourespiritusanto" target="_blank" rel="noreferrer" aria-label="Facebook"><span aria-hidden="true">f</span></a>

@@ -7,8 +7,16 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Tours a Isla Espíritu Santo desde La Paz, Baja California Sur.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#031923',
-    theme_color: '#06263a',
+    background_color: '#041e35',
+    theme_color: '#0a3c6d',
     lang: 'es-MX',
+    icons: [
+      {
+        src: '/images/baja-spirit-logo.png',
+        sizes: '2048x2048',
+        type: 'image/png',
+        purpose: 'any',
+      },
+    ],
   };
 }

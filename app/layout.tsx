@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   applicationName: 'Baja Spirit Adventures',
   authors: [{ name: 'Baja Spirit Adventures' }],
   creator: 'Baja Spirit Adventures',
+  icons: {
+    icon: '/images/baja-spirit-logo.png',
+    apple: '/images/baja-spirit-logo.png',
+  },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
