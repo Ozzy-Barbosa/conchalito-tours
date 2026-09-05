@@ -6,6 +6,7 @@ import {
   Download,
   Mail,
   Fish,
+  Globe2,
   MapPin,
   Phone,
   UsersRound,
@@ -96,6 +97,7 @@ export default function CaptainHectorCardPage() {
               </a>
               <a className="captain-action-secondary" href="tel:+526121178086"><Phone size={19} /> Llamar</a>
               <a className="captain-action-secondary" href="mailto:toursespiritusanto@gmail.com"><Mail size={19} /> Correo</a>
+              <Link className="captain-action-site" href="/"><Globe2 size={19} /> Ver sitio web</Link>
               <a className="captain-action-secondary" href="/capitan-hector-parra.vcf" download><Download size={19} /> Guardar contacto</a>
             </div>
           </div>
@@ -141,6 +143,7 @@ export default function CaptainHectorCardPage() {
           <span>Capitán Héctor Parra · Conchalito Tours</span>
           <a href="mailto:toursespiritusanto@gmail.com">toursespiritusanto@gmail.com</a>
           <a href="tel:+526121178086">+52 612 117 8086</a>
+          <Link href="/aviso-de-privacidad">Aviso de privacidad</Link>
         </footer>
       </div>
     </main>

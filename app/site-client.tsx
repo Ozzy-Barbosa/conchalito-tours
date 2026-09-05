@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import {
   Dialog,
@@ -216,6 +217,7 @@ const content = {
     legal:
       'Precios en pesos mexicanos. Sujeto a disponibilidad y condiciones del mar. Respeta siempre las indicaciones del capitán y del Área Natural Protegida.',
     rights: 'Conchalito Tours. Todos los derechos reservados.',
+    privacyLink: 'Aviso de privacidad',
     float: 'Cotizar por WhatsApp',
   },
   en: {
@@ -402,6 +404,7 @@ const content = {
     legal:
       'Prices are in Mexican pesos. Subject to availability and sea conditions. Always follow the captain’s and Protected Natural Area’s guidance.',
     rights: 'Conchalito Tours. All rights reserved.',
+    privacyLink: 'Privacy notice',
     float: 'WhatsApp quote',
   },
 } as const;
@@ -532,53 +535,89 @@ export default function SiteClient() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'TravelAgency',
-            name: 'Conchalito Tours',
-            '@id': 'https://conchalitotours.com/#organization',
-            url: 'https://conchalitotours.com/',
-            telephone: '+52-612-117-8086',
-            email: 'toursespiritusanto@gmail.com',
-            description:
-              'Tours en lancha a Isla Espíritu Santo desde La Paz, Baja California Sur, para familias y grupos.',
-            priceRange: '$990–$1,500 MXN',
-            image: 'https://conchalitotours.com/images/hero.webp',
-            logo: 'https://conchalitotours.com/images/conchalito-symbol-transparent.png',
-            hasMap: 'https://www.google.com/maps/search/?api=1&query=24.153150578397646%2C-110.32938102502355',
-            geo: {
-              '@type': 'GeoCoordinates',
-              latitude: 24.153150578397646,
-              longitude: -110.32938102502355,
-            },
-            areaServed: { '@type': 'Place', name: 'La Paz, Baja California Sur' },
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: 'La Paz',
-              addressRegion: 'Baja California Sur',
-              addressCountry: 'MX',
-            },
-            founder: {
-              '@type': 'Person',
-              name: 'Héctor Parra',
-              jobTitle: 'Capitán',
-            },
-            contactPoint: {
-              '@type': 'ContactPoint',
-              telephone: '+52-612-117-8086',
-              contactType: 'reservations',
-              availableLanguage: ['Spanish', 'English'],
-            },
-            sameAs: [
-              'https://www.facebook.com/profile.php?id=61572761176971',
-              'https://www.instagram.com/conchalito.tours/',
-              'https://www.facebook.com/tourespiritusanto',
-              'https://www.instagram.com/tourespiritusanto/',
+            '@graph': [
+              {
+                '@type': 'WebSite',
+                '@id': 'https://conchalitotours.com/#website',
+                url: 'https://conchalitotours.com/',
+                name: 'Conchalito Tours',
+                inLanguage: ['es-MX', 'en-US'],
+                publisher: { '@id': 'https://conchalitotours.com/#organization' },
+              },
+              {
+                '@type': ['TravelAgency', 'LocalBusiness'],
+                name: 'Conchalito Tours',
+                '@id': 'https://conchalitotours.com/#organization',
+                url: 'https://conchalitotours.com/',
+                telephone: '+52-612-117-8086',
+                email: 'toursespiritusanto@gmail.com',
+                description:
+                  'Tours en lancha a Balandra e Isla Espíritu Santo desde La Paz, Baja California Sur, para familias y grupos.',
+                priceRange: '$990–$1,500 MXN',
+                currenciesAccepted: 'MXN',
+                image: 'https://conchalitotours.com/images/hero.webp',
+                logo: 'https://conchalitotours.com/images/conchalito-symbol-transparent.png',
+                hasMap: 'https://www.google.com/maps/search/?api=1&query=24.153150578397646%2C-110.32938102502355',
+                geo: {
+                  '@type': 'GeoCoordinates',
+                  latitude: 24.153150578397646,
+                  longitude: -110.32938102502355,
+                },
+                areaServed: [
+                  { '@type': 'City', name: 'La Paz, Baja California Sur' },
+                  { '@type': 'Place', name: 'Isla Espíritu Santo' },
+                  { '@type': 'Place', name: 'Playa Balandra' },
+                ],
+                address: {
+                  '@type': 'PostalAddress',
+                  streetAddress: 'Antonio Navarro y Topete, Playa S/N-C, Zona Central',
+                  postalCode: '23000',
+                  addressLocality: 'La Paz',
+                  addressRegion: 'Baja California Sur',
+                  addressCountry: 'MX',
+                },
+                founder: {
+                  '@type': 'Person',
+                  name: 'Héctor Parra',
+                  jobTitle: 'Capitán',
+                },
+                contactPoint: {
+                  '@type': 'ContactPoint',
+                  telephone: '+52-612-117-8086',
+                  contactType: 'reservations',
+                  availableLanguage: ['Spanish', 'English'],
+                },
+                sameAs: [
+                  'https://www.facebook.com/profile.php?id=61572761176971',
+                  'https://www.instagram.com/conchalito.tours/',
+                  'https://www.facebook.com/tourespiritusanto',
+                  'https://www.instagram.com/tourespiritusanto/',
+                ],
+                makesOffer: t.routes.map((route) => ({
+                  '@type': 'Offer',
+                  priceCurrency: 'MXN',
+                  price: route.price.replace(/[$,]/g, ''),
+                  availability: 'https://schema.org/LimitedAvailability',
+                  url: 'https://conchalitotours.com/#tours',
+                  itemOffered: {
+                    '@type': 'TouristTrip',
+                    name: `Tour ${route.name}`,
+                    description: route.description,
+                    touristType: ['Familias', 'Grupos', 'Viajeros de naturaleza'],
+                  },
+                })),
+              },
+              {
+                '@type': 'FAQPage',
+                '@id': 'https://conchalitotours.com/#preguntas-frecuentes',
+                inLanguage: language === 'es' ? 'es-MX' : 'en-US',
+                mainEntity: t.faqs.map(([question, answer]) => ({
+                  '@type': 'Question',
+                  name: question,
+                  acceptedAnswer: { '@type': 'Answer', text: answer },
+                })),
+              },
             ],
-            makesOffer: t.routes.map((route) => ({
-              '@type': 'Offer',
-              priceCurrency: 'MXN',
-              price: route.price.replace(/[$,]/g, ''),
-              itemOffered: { '@type': 'TouristTrip', name: `Tour ${route.name}` },
-            })),
           }),
         }}
       />
@@ -828,7 +867,10 @@ export default function SiteClient() {
           <div className="footer-links">{t.footerNav.map((item, index) => <a key={item} href={footerHrefs[index]}>{item}</a>)}</div>
           <div className="footer-contact"><span><MapPin size={17} />La Paz, Baja California Sur</span><a href="tel:+526121178086">+52 612 117 8086</a><a href={genericWhatsApp} target="_blank" rel="noreferrer">WhatsApp</a></div>
         </div>
-        <div className="page-width footer-legal"><span>© {new Date().getFullYear()} {t.rights}</span><span>{t.legal}</span></div>
+        <div className="page-width footer-legal">
+          <span>© {new Date().getFullYear()} {t.rights} · <Link href="/aviso-de-privacidad">{t.privacyLink}</Link></span>
+          <span>{t.legal}</span>
+        </div>
       </footer>
 
       <Dialog open={leadOpen} onOpenChange={setLeadOpen}>
@@ -888,7 +930,7 @@ export default function SiteClient() {
                   <textarea name="notes" rows={3} placeholder={t.lead.notesPlaceholder} />
                 </label>
                 <button className="lead-submit" type="submit"><MessageCircle size={19} />{t.lead.submit}</button>
-                <p className="lead-privacy"><ShieldCheck size={15} />{t.lead.privacy}</p>
+                <p className="lead-privacy"><ShieldCheck size={15} /><span>{t.lead.privacy} <Link href="/aviso-de-privacidad">{t.privacyLink}</Link>.</span></p>
               </form>
             </div>
           </div>
