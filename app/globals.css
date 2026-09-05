@@ -65,7 +65,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .nav-links a:hover::after { right: 0; }
 .nav-actions { justify-self: end; display: flex; align-items: center; gap: 11px; }
 .lang-button { border: 1px solid rgba(255,255,255,.44); color: white; background: transparent; border-radius: 999px; height: 42px; width: 42px; cursor: pointer; font-weight: 700; }
-.nav-cta { height: 44px; padding: 0 19px; display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; background: var(--coral); color: var(--navy); font-size: 14px; font-weight: 800; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
+.nav-cta { position: relative; height: 44px; padding: 0 19px; display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; background: var(--coral); color: var(--navy); font-size: 14px; font-weight: 800; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
 .nav-cta, .button-primary { border: 0; cursor: pointer; font-family: inherit; }
 .nav-cta:hover { background: #ffa08a; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(245,139,112,.28); }
 .button-primary:hover { background: #ffa08a; transform: translateY(-2px); }
@@ -105,10 +105,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .preview-card-wide { grid-row: span 2; }
 .preview-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.65,.2,1); }
 .preview-card:hover img { transform: scale(1.045); }
-.preview-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(3,24,35,.9), transparent 68%); }
+.preview-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(3,24,35,.96) 0%, rgba(3,24,35,.72) 38%, rgba(3,24,35,.12) 72%); }
 .preview-copy { position: absolute; inset: auto 30px 29px; color: white; }
 .preview-copy span, .preview-card-blue span { display: block; margin-bottom: 10px; color: var(--aqua); text-transform: uppercase; letter-spacing: .12em; font-weight: 800; font-size: 11px; }
+.preview-copy span { width: max-content; max-width: 100%; padding: 7px 10px; border: 1px solid rgba(168,241,237,.42); border-radius: 999px; background: rgba(2,43,65,.82); color: #baf4f1; text-shadow: 0 1px 8px rgba(0,0,0,.38); }
 .preview-copy h3, .preview-card-blue h3 { margin: 0 0 10px; font-size: 28px; letter-spacing: -.035em; }
+.preview-copy h3 { color: white; text-shadow: 0 3px 18px rgba(0,0,0,.76); }
 .preview-card-wide h3 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(38px, 4vw, 58px); font-weight: 400; }
 .preview-copy p { margin: 0 0 18px; color: rgba(255,255,255,.78); }
 .preview-copy a { display: flex; align-items: center; gap: 8px; width: max-content; font-size: 14px; font-weight: 800; }
@@ -425,8 +427,9 @@ footer { padding: 72px 0 28px; background: var(--deep); color: white; }
   .brand strong { font-size: 12px; letter-spacing: .015em; }
   .brand small { margin-top: 6px; font-size: 7px; letter-spacing: .22em; }
   .nav-actions { gap: 6px; }
-  .nav-cta { width: 40px; height: 40px; justify-content: center; gap: 0; padding: 0; font-size: 0; }
-  .nav-cta svg { margin: 0; }
+  .nav-cta { width: 40px; height: 40px; flex: 0 0 40px; justify-content: center; gap: 0; padding: 0; }
+  .nav-cta-label { display: none; }
+  .nav-cta svg { position: absolute; left: 50%; top: 50%; margin: 0; transform: translate(-50%, -50%); }
   .lang-button { height: 40px; width: 40px; }
   .menu-button { height: 40px; width: 40px; }
   .mobile-menu { top: 101px; padding: 16px; border-color: rgba(126,230,224,.22); box-shadow: 0 24px 70px rgba(0,20,30,.42); }
@@ -446,7 +449,7 @@ footer { padding: 72px 0 28px; background: var(--deep); color: white; }
   .preview-grid { display: flex; flex-direction: column; }
   .preview-card { min-height: 380px; }
   .preview-card-wide { min-height: 460px; }
-  .preview-overlay { background: linear-gradient(180deg, rgba(2,35,52,.28) 0%, rgba(2,35,52,.52) 46%, rgba(2,24,35,.97) 100%); }
+  .preview-overlay { background: linear-gradient(180deg, rgba(2,35,52,.12) 0%, rgba(2,35,52,.56) 43%, rgba(2,24,35,.98) 100%); }
   .preview-copy { inset: auto 24px 25px; text-shadow: 0 2px 16px rgba(0,0,0,.5); }
   .preview-copy span { width: max-content; max-width: 100%; margin-bottom: 13px; padding: 6px 9px; border: 1px solid rgba(126,230,224,.28); border-radius: 999px; background: rgba(2,43,65,.82); color: #8be4df; font-size: 10px; line-height: 1.25; text-shadow: none; }
   .preview-copy h3 { margin-bottom: 13px; color: #fff; font-size: 31px; line-height: 1.02; }

@@ -644,8 +644,8 @@ export default function SiteClient() {
           </div>
           <div className="nav-actions">
             <button className="lang-button" type="button" onClick={toggleLanguage} aria-label={t.langAria}>{t.langLabel}</button>
-            <button className="nav-cta" type="button" onClick={() => setLeadOpen(true)}>
-              <MessageCircle size={17} /> {t.reserve}
+            <button className="nav-cta" type="button" aria-label={t.reserve} onClick={() => setLeadOpen(true)}>
+              <MessageCircle size={17} /> <span className="nav-cta-label">{t.reserve}</span>
             </button>
             <button
               className="menu-button"
