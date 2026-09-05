@@ -75,8 +75,8 @@ export default function CaptainHectorCardPage() {
               className="captain-portrait"
               src="/images/capitan-hector-parra.jpg"
               alt="Capitán Héctor Parra con gorra de capitán durante un recorrido"
-              width="2640"
-              height="3960"
+              width="3960"
+              height="2640"
             />
             <span><Anchor size={18} /> Capitán local</span>
           </div>
