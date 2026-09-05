@@ -12,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: 'es-MX',
     icons: [
       {
-        src: '/images/conchalito-brand-board.png',
+        src: '/images/conchalito-symbol-transparent.png',
         sizes: 'any',
         type: 'image/png',
         purpose: 'any',

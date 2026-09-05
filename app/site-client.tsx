@@ -29,6 +29,7 @@ import {
   UtensilsCrossed,
   X,
 } from 'lucide-react';
+import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '@/components/brand-icons';
 
 type Language = 'es' | 'en';
 
@@ -528,11 +529,12 @@ export default function SiteClient() {
             name: 'Conchalito Tours',
             url: 'https://conchalito-tours.ozzyym97.chatgpt.site',
             telephone: '+52-612-117-8086',
+            email: 'toursespiritusanto@gmail.com',
             description:
               'Tours en lancha a Isla Espíritu Santo desde La Paz, Baja California Sur, para familias y grupos.',
             priceRange: '$990–$1,500 MXN',
             image: 'https://conchalito-tours.ozzyym97.chatgpt.site/images/hero.webp',
-            logo: 'https://conchalito-tours.ozzyym97.chatgpt.site/images/conchalito-brand-board.png',
+            logo: 'https://conchalito-tours.ozzyym97.chatgpt.site/images/conchalito-symbol-transparent.png',
             areaServed: { '@type': 'Place', name: 'La Paz, Baja California Sur' },
             address: {
               '@type': 'PostalAddress',
@@ -541,6 +543,8 @@ export default function SiteClient() {
               addressCountry: 'MX',
             },
             sameAs: [
+              'https://www.facebook.com/profile.php?id=61572761176971',
+              'https://www.instagram.com/conchalito.tours/',
               'https://www.facebook.com/tourespiritusanto',
               'https://www.instagram.com/tourespiritusanto/',
             ],
@@ -566,7 +570,9 @@ export default function SiteClient() {
 
           <nav className="nav-shell" aria-label={t.navAria}>
             <a className="brand" href="#inicio" aria-label="Conchalito Tours">
-              <span className="brand-symbol" aria-hidden="true" />
+              <span className="brand-symbol" aria-hidden="true">
+                <img src="/images/conchalito-symbol-transparent.png" alt="" width="1536" height="1024" />
+              </span>
               <span className="brand-name"><strong>CONCHALITO</strong><small>TOURS</small></span>
             </a>
           <div className="nav-links">
@@ -782,13 +788,16 @@ export default function SiteClient() {
         <div className="page-width footer-main">
           <div className="footer-brand">
             <a className="footer-logo-card" href="#inicio" aria-label="Conchalito Tours">
-              <span className="footer-logo-crop" aria-hidden="true" />
+              <img src="/images/conchalito-symbol-transparent.png" alt="" width="1536" height="1024" />
+              <span><strong>Conchalito</strong><small>Tours</small></span>
             </a>
             <p>{t.social}</p>
             <div className="social-links">
-              <a href="https://www.facebook.com/tourespiritusanto" target="_blank" rel="noreferrer" aria-label="Facebook"><span aria-hidden="true">f</span></a>
-              <a href="https://www.instagram.com/tourespiritusanto/" target="_blank" rel="noreferrer" aria-label="Instagram"><span aria-hidden="true">◎</span></a>
-              <a href={genericWhatsApp} target="_blank" rel="noreferrer" aria-label="WhatsApp"><MessageCircle size={20} /></a>
+              <a href="https://www.facebook.com/profile.php?id=61572761176971" target="_blank" rel="noreferrer" aria-label="Facebook de Conchalito Tours" title="Facebook · Conchalito Tours"><FacebookIcon width="19" height="19" /></a>
+              <a href="https://www.instagram.com/conchalito.tours/" target="_blank" rel="noreferrer" aria-label="Instagram de Conchalito Tours" title="Instagram · Conchalito Tours"><InstagramIcon width="19" height="19" /></a>
+              <a href="https://www.facebook.com/tourespiritusanto" target="_blank" rel="noreferrer" aria-label="Facebook de Tour Espíritu Santo" title="Facebook · Tour Espíritu Santo"><FacebookIcon width="19" height="19" /></a>
+              <a href="https://www.instagram.com/tourespiritusanto/" target="_blank" rel="noreferrer" aria-label="Instagram de Tour Espíritu Santo" title="Instagram · Tour Espíritu Santo"><InstagramIcon width="19" height="19" /></a>
+              <a href={genericWhatsApp} target="_blank" rel="noreferrer" aria-label="WhatsApp"><WhatsAppIcon width="21" height="21" /></a>
             </div>
           </div>
           <div className="footer-links">{t.footerNav.map((item, index) => <a key={item} href={footerHrefs[index]}>{item}</a>)}</div>
@@ -804,7 +813,7 @@ export default function SiteClient() {
           </DialogClose>
           <div className="lead-dialog-shell">
             <aside className="lead-dialog-brand">
-              <span className="lead-logo-crop" aria-hidden="true" />
+              <span className="lead-logo-crop" aria-hidden="true"><img src="/images/conchalito-symbol-transparent.png" alt="" width="1536" height="1024" /></span>
               <div>
                 <p>{t.lead.eyebrow}</p>
                 <h3>Conchalito<br />Tours</h3>

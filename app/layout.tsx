@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Conchalito Tours' }],
   creator: 'Conchalito Tours',
   icons: {
-    icon: '/images/conchalito-brand-board.png',
-    apple: '/images/conchalito-brand-board.png',
+    icon: '/images/conchalito-symbol-transparent.png',
+    apple: '/images/conchalito-symbol-transparent.png',
   },
   alternates: { canonical: '/' },
   openGraph: {
