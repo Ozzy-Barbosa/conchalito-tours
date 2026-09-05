@@ -157,7 +157,7 @@ const content = {
     aboutKicker: 'Más que un paseo en lancha',
     aboutTitle: 'El espíritu de Baja se comparte.',
     aboutText1:
-      'Baja Spirit Adventures nace de la experiencia de Héctor en el mar y de su gusto por reunir a familias y amigos alrededor de un día extraordinario.',
+      'Conchalito Tours nace de la experiencia de Héctor en el mar y de su gusto por reunir a familias y amigos alrededor de un día extraordinario.',
     aboutText2:
       'Antes de cada salida se prepara la embarcación, el equipo y cada detalle de la jornada. El resultado es un recorrido cercano, sin prisas y con la atención de alguien que conoce el camino.',
     aboutQuote: '“La idea es que vengan familias y grupos, y que disfruten el día completo.”',
@@ -177,7 +177,7 @@ const content = {
     capacityText: 'Hasta 17 viajeros. El mínimo operativo para una salida compartida es de 10 lugares pagados.',
     galleryKicker: 'Momentos reales',
     galleryTitle: 'Así se siente Espíritu Santo.',
-    galleryLead: 'Fotografías tomadas durante una salida real con Baja Spirit Adventures.',
+    galleryLead: 'Fotografías reales de nuestros recorridos por Balandra e Isla Espíritu Santo.',
     galleryAlts: [
       'Niña sonriendo con chaleco salvavidas en la lancha',
       'Familia nadando en agua turquesa en Isla Espíritu Santo',
@@ -185,7 +185,17 @@ const content = {
       'Viajeros junto a una formación rocosa de Isla Espíritu Santo',
       'Dos niñas disfrutando del mar durante el tour',
       'Pareja visitando una formación rocosa en la costa',
+      'Familia junto a la emblemática formación rocosa de Balandra',
+      'Viajeros nadando frente a la lancha de Conchalito Tours',
+      'Niño sonriendo en las aguas transparentes del Mar de Cortés',
+      'Estela de la lancha frente a la costa de Baja California Sur',
     ],
+    locationKicker: 'Punto de encuentro',
+    locationTitle: 'Encuentra al Capitán Héctor en El Conchalito.',
+    locationText:
+      'Estamos en Nahvyla Yachts, en la zona de El Conchalito, La Paz. Al llegar, pregunta por el Capitán Héctor; por WhatsApp te confirmaremos la hora y los detalles de tu salida.',
+    locationButton: 'Pedir indicaciones por WhatsApp',
+    mapTitle: 'Ubicación de Conchalito Tours en Nahvyla Yachts, La Paz',
     faqKicker: 'Antes de reservar',
     faqTitle: 'Preguntas frecuentes',
     faqs: [
@@ -206,7 +216,7 @@ const content = {
     footerNav: ['Inicio', 'Rutas y precios', 'Galería', 'Preguntas'],
     legal:
       'Precios en pesos mexicanos. Sujeto a disponibilidad y condiciones del mar. Respeta siempre las indicaciones del capitán y del Área Natural Protegida.',
-    rights: 'Baja Spirit Adventures. Todos los derechos reservados.',
+    rights: 'Conchalito Tours. Todos los derechos reservados.',
     float: 'Cotizar por WhatsApp',
   },
   en: {
@@ -333,7 +343,7 @@ const content = {
     aboutKicker: 'More than a boat ride',
     aboutTitle: 'The spirit of Baja is meant to be shared.',
     aboutText1:
-      'Baja Spirit Adventures grew from Héctor’s experience at sea and his love of bringing families and friends together for an extraordinary day.',
+      'Conchalito Tours grew from Héctor’s experience at sea and his love of bringing families and friends together for an extraordinary day.',
     aboutText2:
       'Before every departure, the boat, equipment and every detail are prepared with care. The result is an easygoing, personal journey guided by someone who knows the way.',
     aboutQuote: '“The idea is to welcome families and groups so they can enjoy the whole day.”',
@@ -353,7 +363,7 @@ const content = {
     capacityText: 'Up to 17 guests. A shared departure requires a minimum of 10 paid seats.',
     galleryKicker: 'Real moments',
     galleryTitle: 'This is how Espíritu Santo feels.',
-    galleryLead: 'Photos taken during a real Baja Spirit Adventures trip.',
+    galleryLead: 'Real photographs from our Balandra and Espíritu Santo Island trips.',
     galleryAlts: [
       'Smiling girl wearing a life jacket on the boat',
       'Family swimming in turquoise water at Espíritu Santo Island',
@@ -361,7 +371,17 @@ const content = {
       'Travelers beside a rock formation at Espíritu Santo Island',
       'Two girls enjoying the sea during the tour',
       'Couple visiting a coastal rock formation',
+      'Family beside Balandra’s iconic rock formation',
+      'Travelers swimming in front of the Conchalito Tours boat',
+      'Smiling child in the clear waters of the Sea of Cortez',
+      'Boat wake along the Baja California Sur coast',
     ],
+    locationKicker: 'Meeting point',
+    locationTitle: 'Find Captain Héctor in El Conchalito.',
+    locationText:
+      'Meet us at Nahvyla Yachts in the El Conchalito area of La Paz. Ask for Captain Héctor when you arrive; we will confirm your departure time and details by WhatsApp.',
+    locationButton: 'Get directions on WhatsApp',
+    mapTitle: 'Conchalito Tours location at Nahvyla Yachts in La Paz',
     faqKicker: 'Before you book',
     faqTitle: 'Frequently asked questions',
     faqs: [
@@ -382,7 +402,7 @@ const content = {
     footerNav: ['Home', 'Routes & prices', 'Gallery', 'Questions'],
     legal:
       'Prices are in Mexican pesos. Subject to availability and sea conditions. Always follow the captain’s and Protected Natural Area’s guidance.',
-    rights: 'Baja Spirit Adventures. All rights reserved.',
+    rights: 'Conchalito Tours. All rights reserved.',
     float: 'WhatsApp quote',
   },
 } as const;
@@ -397,6 +417,10 @@ const galleryImages = [
   '/images/rock-group.webp',
   '/images/family.webp',
   '/images/couple.webp',
+  '/images/balandra-rock.jpg',
+  '/images/conchalito-boat.jpg',
+  '/images/sea-smile.jpg',
+  '/images/sea-of-cortez-coast.jpg',
 ];
 
 function whatsappLink(message: string) {
@@ -407,21 +431,48 @@ export default function SiteClient() {
   const [language, setLanguage] = useState<Language>('es');
   const [menuOpen, setMenuOpen] = useState(false);
   const [leadOpen, setLeadOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const t = content[language];
   const genericWhatsApp = whatsappLink(
     language === 'es'
-      ? 'Hola Baja Spirit Adventures, quiero cotizar un tour a Isla Espíritu Santo.'
-      : 'Hello Baja Spirit Adventures, I would like a quote for an Espíritu Santo Island tour.',
+      ? 'Hola Conchalito Tours, quiero cotizar un tour a Isla Espíritu Santo.'
+      : 'Hello Conchalito Tours, I would like a quote for an Espíritu Santo Island tour.',
   );
 
   useEffect(() => {
-    const saved = window.localStorage.getItem('bsa-language');
+    const saved = window.localStorage.getItem('conchalito-language');
     if (saved === 'es' || saved === 'en') setLanguage(saved);
   }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
-    window.localStorage.setItem('bsa-language', language);
+    window.localStorage.setItem('conchalito-language', language);
+  }, [language]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 42);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      elements.forEach((element) => element.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }),
+      { threshold: 0.12, rootMargin: '0px 0px -45px' },
+    );
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
   }, [language]);
 
   const toggleLanguage = () => setLanguage((current) => (current === 'es' ? 'en' : 'es'));
@@ -439,7 +490,7 @@ export default function SiteClient() {
     const notes = String(data.get('notes') || '').trim();
     const message = language === 'es'
       ? [
-          'Hola Héctor, quiero recibir información para organizar un tour con Baja Spirit Adventures.',
+          'Hola Héctor, quiero recibir información para organizar un tour con Conchalito Tours.',
           '',
           `Nombre: ${name}`,
           `WhatsApp: ${phone}`,
@@ -450,7 +501,7 @@ export default function SiteClient() {
           notes ? `Comentarios: ${notes}` : '',
         ].filter(Boolean).join('\n')
       : [
-          'Hello Héctor, I would like information to plan a tour with Baja Spirit Adventures.',
+          'Hello Héctor, I would like information to plan a tour with Conchalito Tours.',
           '',
           `Name: ${name}`,
           `WhatsApp: ${phone}`,
@@ -474,14 +525,14 @@ export default function SiteClient() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'TravelAgency',
-            name: 'Baja Spirit Adventures',
-            url: 'https://bajaspiritadventures.com',
+            name: 'Conchalito Tours',
+            url: 'https://conchalito-tours.ozzyym97.chatgpt.site',
             telephone: '+52-612-117-8086',
             description:
               'Tours en lancha a Isla Espíritu Santo desde La Paz, Baja California Sur, para familias y grupos.',
             priceRange: '$990–$1,500 MXN',
-            image: 'https://bajaspiritadventures.com/images/hero.webp',
-            logo: 'https://bajaspiritadventures.com/images/baja-spirit-symbol-transparent.png',
+            image: 'https://conchalito-tours.ozzyym97.chatgpt.site/images/hero.webp',
+            logo: 'https://conchalito-tours.ozzyym97.chatgpt.site/images/conchalito-brand-board.png',
             areaServed: { '@type': 'Place', name: 'La Paz, Baja California Sur' },
             address: {
               '@type': 'PostalAddress',
@@ -507,18 +558,17 @@ export default function SiteClient() {
         <div className="hero-photo" aria-hidden="true" />
         <div className="hero-shade" aria-hidden="true" />
 
-        <div className="topline">
-          <span>{t.place}</span>
-          <span className="topline-note">{t.topline}</span>
-        </div>
+        <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+          <div className="topline">
+            <span>{t.place}</span>
+            <span className="topline-note">{t.topline}</span>
+          </div>
 
-        <nav className="nav-shell" aria-label={t.navAria}>
-          <a className="brand" href="#inicio" aria-label="Baja Spirit Adventures">
-            <span className="brand-symbol" aria-hidden="true">
-              <img src="/images/baja-spirit-symbol-transparent.png" alt="" width="1535" height="1025" />
-            </span>
-            <span className="brand-name"><strong>BAJA SPIRIT</strong><small>ADVENTURES</small></span>
-          </a>
+          <nav className="nav-shell" aria-label={t.navAria}>
+            <a className="brand" href="#inicio" aria-label="Conchalito Tours">
+              <span className="brand-symbol" aria-hidden="true" />
+              <span className="brand-name"><strong>CONCHALITO</strong><small>TOURS</small></span>
+            </a>
           <div className="nav-links">
             {t.nav.map((item, index) => <a key={item} href={sectionHrefs[index]}>{item}</a>)}
           </div>
@@ -537,16 +587,17 @@ export default function SiteClient() {
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
-        </nav>
+          </nav>
 
-        {menuOpen && (
-          <div className="mobile-menu">
-            {t.nav.map((item, index) => (
-              <a key={item} href={sectionHrefs[index]} onClick={() => setMenuOpen(false)}>{item}</a>
-            ))}
-            <a href={genericWhatsApp} target="_blank" rel="noreferrer"><MessageCircle size={18} /> {t.quote}</a>
-          </div>
-        )}
+          {menuOpen && (
+            <div className="mobile-menu">
+              {t.nav.map((item, index) => (
+                <a key={item} href={sectionHrefs[index]} onClick={() => setMenuOpen(false)}>{item}</a>
+              ))}
+              <a href={genericWhatsApp} target="_blank" rel="noreferrer"><MessageCircle size={18} /> {t.quote}</a>
+            </div>
+          )}
+        </header>
 
         <div className="hero-content page-width">
           <p className="eyebrow"><span /> {t.eyebrow}</p>
@@ -575,11 +626,11 @@ export default function SiteClient() {
       </section>
 
       <section className="experience-preview page-width" id="experiencias">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <div><p className="kicker">{t.kicker}</p><h2>{t.experienceTitle}</h2></div>
           <p>{t.experienceLead}</p>
         </div>
-        <div className="preview-grid">
+        <div className="preview-grid" data-reveal>
           <article className="preview-card preview-card-wide">
             <img src="/images/hero.webp" alt="Navegación frente a la costa de Isla Espíritu Santo" />
             <div className="preview-overlay" />
@@ -610,17 +661,17 @@ export default function SiteClient() {
 
       <section className="routes-section" id="tours">
         <div className="page-width">
-          <div className="routes-heading">
+          <div className="routes-heading" data-reveal>
             <p className="kicker">{t.routesKicker}</p>
             <h2>{t.routesTitle}</h2>
             <p>{t.routesLead}</p>
           </div>
-          <div className="route-grid">
+          <div className="route-grid" data-reveal>
             {t.routes.map((route) => {
               const routeWhatsApp = whatsappLink(
                 language === 'es'
-                  ? `Hola Baja Spirit Adventures, quiero cotizar la ruta ${route.name} de ${route.price} MXN por persona.`
-                  : `Hello Baja Spirit Adventures, I would like a quote for the ${route.name} route at ${route.price} MXN per person.`,
+                  ? `Hola Conchalito Tours, quiero cotizar la ruta ${route.name} de ${route.price} MXN por persona.`
+                  : `Hello Conchalito Tours, I would like a quote for the ${route.name} route at ${route.price} MXN per person.`,
               );
               return (
                 <article className={`route-card ${'featured' in route && route.featured ? 'route-featured' : ''}`} key={route.name}>
@@ -641,8 +692,8 @@ export default function SiteClient() {
       </section>
 
       <section className="included-section page-width">
-        <div className="included-heading"><p className="kicker">{t.includeKicker}</p><h2>{t.includeTitle}</h2></div>
-        <div className="included-grid">
+        <div className="included-heading" data-reveal><p className="kicker">{t.includeKicker}</p><h2>{t.includeTitle}</h2></div>
+        <div className="included-grid" data-reveal>
           {t.includes.map(([title, text], index) => {
             const Icon = featureIcons[index];
             return <article key={title}><span><Icon size={23} /></span><h3>{title}</h3><p>{text}</p></article>;
@@ -651,8 +702,8 @@ export default function SiteClient() {
       </section>
 
       <section className="about-section" id="nosotros">
-        <div className="about-image"><img src="/images/rock-group.webp" alt="Grupo de viajeros de Baja Spirit Adventures en Isla Espíritu Santo" /></div>
-        <div className="about-copy">
+        <div className="about-image" data-reveal><img src="/images/rock-group.webp" alt="Grupo de viajeros de Conchalito Tours en Isla Espíritu Santo" /></div>
+        <div className="about-copy" data-reveal>
           <p className="kicker">{t.aboutKicker}</p>
           <h2>{t.aboutTitle}</h2>
           <p>{t.aboutText1}</p><p>{t.aboutText2}</p>
@@ -662,28 +713,53 @@ export default function SiteClient() {
       </section>
 
       <section className="how-section page-width" id="como-funciona">
-        <div className="how-heading"><p className="kicker">{t.howKicker}</p><h2>{t.howTitle}</h2></div>
-        <ol className="step-grid">
+        <div className="how-heading" data-reveal><p className="kicker">{t.howKicker}</p><h2>{t.howTitle}</h2></div>
+        <ol className="step-grid" data-reveal>
           {t.steps.map(([title, text], index) => <li key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></li>)}
         </ol>
-        <div className="operations-panel">
+        <div className="operations-panel" data-reveal>
           <div><CalendarDays size={26} /><span><strong>{t.scheduleTitle}</strong><p>{t.scheduleText}</p></span></div>
           <div><Users size={26} /><span><strong>{t.capacityTitle}</strong><p>{t.capacityText}</p></span></div>
         </div>
       </section>
 
       <section className="gallery-section" id="galeria">
-        <div className="page-width gallery-heading">
+        <div className="page-width gallery-heading" data-reveal>
           <div><p className="kicker">{t.galleryKicker}</p><h2>{t.galleryTitle}</h2></div><p>{t.galleryLead}</p>
         </div>
-        <div className="gallery-grid page-width">
+        <div className="gallery-grid page-width" data-reveal>
           {galleryImages.map((image, index) => <figure key={image}><img src={image} alt={t.galleryAlts[index]} loading="lazy" /></figure>)}
         </div>
       </section>
 
+      <section className="location-section" id="ubicacion">
+        <div className="page-width location-grid" data-reveal>
+          <div className="location-copy">
+            <p className="kicker">{t.locationKicker}</p>
+            <h2>{t.locationTitle}</h2>
+            <p>{t.locationText}</p>
+            <a className="button-dark" href={genericWhatsApp} target="_blank" rel="noreferrer">
+              <MapPin size={18} />{t.locationButton}
+            </a>
+          </div>
+          <div className="map-frame">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.5296583820495!2d-110.32938102502355!3d24.153150578397646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86afd3007b5fc5cd%3A0x51858b114c027234!2sNahvyla%20Yachts!5e0!3m2!1ses-419!2smx!4v1788568032499!5m2!1ses-419!2smx"
+              title={t.mapTitle}
+              width="600"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="faq-section page-width" id="preguntas">
-        <div className="faq-heading"><p className="kicker">{t.faqKicker}</p><h2>{t.faqTitle}</h2></div>
-        <div className="faq-list">
+        <div className="faq-heading" data-reveal><p className="kicker">{t.faqKicker}</p><h2>{t.faqTitle}</h2></div>
+        <div className="faq-list" data-reveal>
           {t.faqs.map(([question, answer], index) => (
             <details key={question} open={index === 0}>
               <summary><span>{question}</span><ChevronDown size={21} /></summary>
@@ -695,7 +771,7 @@ export default function SiteClient() {
 
       <section className="final-cta">
         <div className="final-photo" aria-hidden="true" />
-        <div className="page-width final-content">
+        <div className="page-width final-content" data-reveal>
           <p className="kicker">{t.finalKicker}</p>
           <h2>{t.finalTitle}</h2><p>{t.finalText}</p>
           <div><button className="button-primary" type="button" onClick={() => setLeadOpen(true)}><CalendarDays size={19} />{t.lead.trigger}</button><a href="tel:+526121178086">{t.call}</a></div>
@@ -705,14 +781,8 @@ export default function SiteClient() {
       <footer>
         <div className="page-width footer-main">
           <div className="footer-brand">
-            <a className="footer-logo-card" href="#inicio" aria-label="Baja Spirit Adventures">
-              <img
-                src="/images/baja-spirit-symbol-transparent.png"
-                alt="Baja Spirit Adventures"
-                width="1535"
-                height="1025"
-                loading="lazy"
-              />
+            <a className="footer-logo-card" href="#inicio" aria-label="Conchalito Tours">
+              <span className="footer-logo-crop" aria-hidden="true" />
             </a>
             <p>{t.social}</p>
             <div className="social-links">
@@ -734,10 +804,10 @@ export default function SiteClient() {
           </DialogClose>
           <div className="lead-dialog-shell">
             <aside className="lead-dialog-brand">
-              <img src="/images/baja-spirit-symbol-transparent.png" alt="" width="1535" height="1025" aria-hidden="true" />
+              <span className="lead-logo-crop" aria-hidden="true" />
               <div>
                 <p>{t.lead.eyebrow}</p>
-                <h3>Baja Spirit<br />Adventures</h3>
+                <h3>Conchalito<br />Tours</h3>
                 <ul>
                   {t.lead.benefits.map((benefit) => <li key={benefit}><Check size={16} />{benefit}</li>)}
                 </ul>

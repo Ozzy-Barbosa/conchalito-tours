@@ -2,17 +2,17 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Baja Spirit Adventures',
-    short_name: 'Baja Spirit',
-    description: 'Tours a Isla Espíritu Santo desde La Paz, Baja California Sur.',
+    name: 'Conchalito Tours',
+    short_name: 'Conchalito',
+    description: 'Tours a Balandra e Isla Espíritu Santo desde La Paz, Baja California Sur.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#041e35',
-    theme_color: '#0a3c6d',
+    background_color: '#fbf9f2',
+    theme_color: '#063c5a',
     lang: 'es-MX',
     icons: [
       {
-        src: '/images/baja-spirit-symbol-transparent.png',
+        src: '/images/conchalito-brand-board.png',
         sizes: 'any',
         type: 'image/png',
         purpose: 'any',

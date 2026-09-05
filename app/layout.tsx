@@ -13,15 +13,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://bajaspiritadventures.com'),
+  metadataBase: new URL('https://conchalito-tours.ozzyym97.chatgpt.site'),
   title: {
-    default: 'Baja Spirit Adventures | Tours a Isla Espíritu Santo desde La Paz',
-    template: '%s | Baja Spirit Adventures',
+    default: 'Conchalito Tours | Tours a Balandra e Isla Espíritu Santo desde La Paz',
+    template: '%s | Conchalito Tours',
   },
   description:
-    'Tours en lancha a Isla Espíritu Santo desde La Paz, Baja California Sur. Snorkel, lobos marinos, playas, pesca y experiencias privadas con guías locales.',
+    'Tours en lancha a Balandra e Isla Espíritu Santo desde La Paz con el Capitán Héctor. Snorkel, playas, vida marina y salidas para familias y grupos.',
   keywords: [
+    'Conchalito Tours',
     'tour Isla Espíritu Santo',
+    'tour Balandra La Paz',
+    'piedra de Balandra tour',
+    'Capitán Héctor tours La Paz',
     'tours La Paz Baja California Sur',
     'tour en lancha Isla Espíritu Santo',
     'snorkel lobos marinos La Paz',
@@ -30,28 +34,28 @@ export const metadata: Metadata = {
     'tour Balandra y Espíritu Santo',
     'Sea of Cortez tours La Paz',
   ],
-  applicationName: 'Baja Spirit Adventures',
-  authors: [{ name: 'Baja Spirit Adventures' }],
-  creator: 'Baja Spirit Adventures',
+  applicationName: 'Conchalito Tours',
+  authors: [{ name: 'Conchalito Tours' }],
+  creator: 'Conchalito Tours',
   icons: {
-    icon: '/images/baja-spirit-symbol-transparent.png',
-    apple: '/images/baja-spirit-symbol-transparent.png',
+    icon: '/images/conchalito-brand-board.png',
+    apple: '/images/conchalito-brand-board.png',
   },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: 'es_MX',
     alternateLocale: 'en_US',
-    siteName: 'Baja Spirit Adventures',
+    siteName: 'Conchalito Tours',
     url: '/',
-    title: 'Tours a Isla Espíritu Santo desde La Paz | Baja Spirit Adventures',
+    title: 'Tours a Balandra e Isla Espíritu Santo | Conchalito Tours',
     description:
-      'Tres rutas a Isla Espíritu Santo desde $990 MXN por persona. Experiencias para familias y grupos con atención local.',
+      'Tres rutas desde La Paz, atención directa del Capitán Héctor y experiencias reales para familias y grupos.',
   },
   twitter: {
     card: 'summary',
-    title: 'Baja Spirit Adventures | Isla Espíritu Santo',
-    description: 'Tours en lancha desde La Paz para familias y grupos.',
+    title: 'Conchalito Tours | Balandra e Isla Espíritu Santo',
+    description: 'Tours en lancha desde La Paz con atención directa del Capitán Héctor.',
   },
   category: 'travel',
 };

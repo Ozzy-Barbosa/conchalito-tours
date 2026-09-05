@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://bajaspiritadventures.com/sitemap.xml',
-    host: 'https://bajaspiritadventures.com',
+    sitemap: 'https://conchalito-tours.ozzyym97.chatgpt.site/sitemap.xml',
+    host: 'https://conchalito-tours.ozzyym97.chatgpt.site',
   };
 }
