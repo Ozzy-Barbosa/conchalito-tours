@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import {
   Anchor,
   ArrowUpRight,
@@ -11,7 +12,7 @@ import {
 } from 'lucide-react';
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from '@/components/brand-icons';
 
-const cardUrl = 'https://conchalito-tours.ozzyym97.chatgpt.site/tarjeta/capitan-hector-parra';
+const cardUrl = 'https://conchalitotours.com/tarjeta/capitan-hector-parra';
 const whatsappUrl =
   'https://wa.me/526121178086?text=Hola%20Capit%C3%A1n%20H%C3%A9ctor%2C%20vi%20su%20tarjeta%20digital%20y%20quiero%20informaci%C3%B3n%20sobre%20un%20tour.';
 
@@ -62,10 +63,10 @@ export default function CaptainHectorCardPage() {
 
       <div className="digital-card-shell">
         <header className="digital-card-header">
-          <a className="digital-card-brand" href="/" aria-label="Ir al sitio de Conchalito Tours">
+          <Link className="digital-card-brand" href="/" aria-label="Ir al sitio de Conchalito Tours">
             <img src="/images/conchalito-symbol-transparent.png" alt="" width="1536" height="1024" />
             <span><strong>Conchalito</strong><small>Tours</small></span>
-          </a>
+          </Link>
           <span className="digital-card-label">Tarjeta digital</span>
         </header>
 

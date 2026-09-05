@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -18,13 +18,11 @@ import {
   Clock3,
   Compass,
   Fish,
-  LifeBuoy,
   MapPin,
   Menu,
   MessageCircle,
   ShieldCheck,
   Sparkles,
-  Sun,
   Users,
   UtensilsCrossed,
   X,
@@ -442,7 +440,9 @@ export default function SiteClient() {
 
   useEffect(() => {
     const saved = window.localStorage.getItem('conchalito-language');
-    if (saved === 'es' || saved === 'en') setLanguage(saved);
+    if (saved === 'es' || saved === 'en') {
+      window.queueMicrotask(() => setLanguage(saved));
+    }
   }, []);
 
   useEffect(() => {
@@ -452,9 +452,12 @@ export default function SiteClient() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 42);
-    onScroll();
+    const frame = window.requestAnimationFrame(onScroll);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -478,17 +481,21 @@ export default function SiteClient() {
 
   const toggleLanguage = () => setLanguage((current) => (current === 'es' ? 'en' : 'es'));
 
-  const handleLeadSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleLeadSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement }) => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    const name = String(data.get('name') || '');
-    const phone = String(data.get('phone') || '');
-    const date = String(data.get('date') || '') || t.lead.noDate;
-    const travelers = String(data.get('travelers') || '');
-    const route = String(data.get('route') || '');
-    const tripType = String(data.get('tripType') || '');
-    const notes = String(data.get('notes') || '').trim();
+    const textValue = (key: string) => {
+      const value = data.get(key);
+      return typeof value === 'string' ? value : '';
+    };
+    const name = textValue('name');
+    const phone = textValue('phone');
+    const date = textValue('date') || t.lead.noDate;
+    const travelers = textValue('travelers');
+    const route = textValue('route');
+    const tripType = textValue('tripType');
+    const notes = textValue('notes').trim();
     const message = language === 'es'
       ? [
           'Hola Héctor, quiero recibir información para organizar un tour con Conchalito Tours.',
@@ -527,20 +534,38 @@ export default function SiteClient() {
             '@context': 'https://schema.org',
             '@type': 'TravelAgency',
             name: 'Conchalito Tours',
-            url: 'https://conchalito-tours.ozzyym97.chatgpt.site',
+            '@id': 'https://conchalitotours.com/#organization',
+            url: 'https://conchalitotours.com/',
             telephone: '+52-612-117-8086',
             email: 'toursespiritusanto@gmail.com',
             description:
               'Tours en lancha a Isla Espíritu Santo desde La Paz, Baja California Sur, para familias y grupos.',
             priceRange: '$990–$1,500 MXN',
-            image: 'https://conchalito-tours.ozzyym97.chatgpt.site/images/hero.webp',
-            logo: 'https://conchalito-tours.ozzyym97.chatgpt.site/images/conchalito-symbol-transparent.png',
+            image: 'https://conchalitotours.com/images/hero.webp',
+            logo: 'https://conchalitotours.com/images/conchalito-symbol-transparent.png',
+            hasMap: 'https://www.google.com/maps/search/?api=1&query=24.153150578397646%2C-110.32938102502355',
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 24.153150578397646,
+              longitude: -110.32938102502355,
+            },
             areaServed: { '@type': 'Place', name: 'La Paz, Baja California Sur' },
             address: {
               '@type': 'PostalAddress',
               addressLocality: 'La Paz',
               addressRegion: 'Baja California Sur',
               addressCountry: 'MX',
+            },
+            founder: {
+              '@type': 'Person',
+              name: 'Héctor Parra',
+              jobTitle: 'Capitán',
+            },
+            contactPoint: {
+              '@type': 'ContactPoint',
+              telephone: '+52-612-117-8086',
+              contactType: 'reservations',
+              availableLanguage: ['Spanish', 'English'],
             },
             sameAs: [
               'https://www.facebook.com/profile.php?id=61572761176971',

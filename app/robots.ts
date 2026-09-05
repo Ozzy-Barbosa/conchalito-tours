@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://conchalito-tours.ozzyym97.chatgpt.site/sitemap.xml',
-    host: 'https://conchalito-tours.ozzyym97.chatgpt.site',
+    sitemap: 'https://conchalitotours.com/sitemap.xml',
+    host: 'https://conchalitotours.com',
   };
 }

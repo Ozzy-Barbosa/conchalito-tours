@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://conchalito-tours.ozzyym97.chatgpt.site'),
+  metadataBase: new URL('https://conchalitotours.com'),
   title: {
     default: 'Conchalito Tours | Tours a Balandra e Isla Espíritu Santo desde La Paz',
     template: '%s | Conchalito Tours',
@@ -41,13 +41,24 @@ export const metadata: Metadata = {
     icon: '/images/conchalito-symbol-transparent.png',
     apple: '/images/conchalito-symbol-transparent.png',
   },
-  alternates: { canonical: '/' },
+  alternates: { canonical: 'https://conchalitotours.com/' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   openGraph: {
     type: 'website',
     locale: 'es_MX',
     alternateLocale: 'en_US',
     siteName: 'Conchalito Tours',
-    url: '/',
+    url: 'https://conchalitotours.com/',
     title: 'Tours a Balandra e Isla Espíritu Santo | Conchalito Tours',
     description:
       'Tres rutas desde La Paz, atención directa del Capitán Héctor y experiencias reales para familias y grupos.',
@@ -66,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es-MX">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
