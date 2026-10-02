@@ -12,6 +12,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+// A versioned, lightweight JPEG avoids reusing the old social-image cache.
+// The brand fits in the center square for compact messaging-app previews.
+const socialImage = 'https://conchalitotours.com/images/conchalito-social-v2.jpg';
+const socialDescription =
+  'Explora Balandra e Isla Espíritu Santo desde La Paz con el Capitán Héctor. Reserva por WhatsApp.';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://conchalitotours.com'),
   title: {
@@ -60,23 +66,28 @@ export const metadata: Metadata = {
     siteName: 'Conchalito Tours',
     url: 'https://conchalitotours.com/',
     title: 'Conchalito Tours | Balandra e Isla Espíritu Santo',
-    description:
-      'Tours en lancha desde La Paz con el Capitán Héctor. Elige tu ruta, reúne a tu grupo y reserva por WhatsApp.',
+    description: socialDescription,
     images: [
       {
-        url: '/og.png',
+        url: socialImage,
+        secureUrl: socialImage,
+        type: 'image/jpeg',
         width: 1200,
         height: 630,
-        alt: 'Conchalito Tours: tours en lancha a Balandra e Isla Espíritu Santo desde La Paz',
+        alt: 'Conchalito Tours sobre las aguas turquesa y la costa del Mar de Cortés',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Conchalito Tours | Balandra e Isla Espíritu Santo',
-    description:
-      'Tours en lancha desde La Paz con el Capitán Héctor. Elige tu ruta y reserva por WhatsApp.',
-    images: ['/og.png'],
+    description: socialDescription,
+    images: [
+      {
+        url: socialImage,
+        alt: 'Conchalito Tours sobre las aguas turquesa y la costa del Mar de Cortés',
+      },
+    ],
   },
   category: 'travel',
 };
