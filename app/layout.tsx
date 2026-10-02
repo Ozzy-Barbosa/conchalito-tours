@@ -59,14 +59,24 @@ export const metadata: Metadata = {
     alternateLocale: 'en_US',
     siteName: 'Conchalito Tours',
     url: 'https://conchalitotours.com/',
-    title: 'Tours a Balandra e Isla Espíritu Santo | Conchalito Tours',
+    title: 'Conchalito Tours | Balandra e Isla Espíritu Santo',
     description:
-      'Tres rutas desde La Paz, atención directa del Capitán Héctor y experiencias reales para familias y grupos.',
+      'Tours en lancha desde La Paz con el Capitán Héctor. Elige tu ruta, reúne a tu grupo y reserva por WhatsApp.',
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Conchalito Tours: tours en lancha a Balandra e Isla Espíritu Santo desde La Paz',
+      },
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Conchalito Tours | Balandra e Isla Espíritu Santo',
-    description: 'Tours en lancha desde La Paz con atención directa del Capitán Héctor.',
+    description:
+      'Tours en lancha desde La Paz con el Capitán Héctor. Elige tu ruta y reserva por WhatsApp.',
+    images: ['/og.png'],
   },
   category: 'travel',
 };
